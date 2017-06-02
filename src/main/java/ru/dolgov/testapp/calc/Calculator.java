@@ -1,6 +1,6 @@
 package ru.dolgov.testapp.calc;
 
-import java.io.File;
+import java.io.*;
 
 /**
  * @author M. Dolgov
@@ -37,7 +37,7 @@ public class Calculator {
         return inputNumbers[0] * inputNumbers[1] + inputNumbers[2];
     }
 
-    public static void commandParser(String command) {
+    public static String commandParser(String command) {
         String[] commandArray = command.split(" ");
         int[] inputNumbers = new int[commandArray.length - 1];
         try {
@@ -45,21 +45,47 @@ public class Calculator {
                 inputNumbers[i] = Integer.parseInt(commandArray[i + 1]);
             }
             if (commandArray[0].equals("add")) {
-                System.out.println("Ответ: " + add(inputNumbers));
+                return "Ответ: " + add(inputNumbers);
             } else if (commandArray[0].equals("mul")) {
-                System.out.println("Ответ: " + mul(inputNumbers));
+                return "Ответ: " + mul(inputNumbers);
             } else if (commandArray[0].equals("mulAndAdd")) {
-                System.out.println("Ответ: " + mulAndAdd(inputNumbers));
+                return "Ответ: " + mulAndAdd(inputNumbers);
             } else {
-                System.out.println("Введена неправильная команда");
+                return "Введена неправильная команда";
             }
         } catch (NumberFormatException e) {
-            System.out.println("После команды нужно вводить числа");
+            return "После команды нужно вводить числа";
         }
     }
 
-    public static void readFile(String fileName) {
-        
+    private static String readFile(String fileName) {
+        int symbol;
+        StringBuffer sb = new StringBuffer();
+        try{
+            BufferedInputStream bis = new BufferedInputStream(new FileInputStream(fileName));
+            do {
+                symbol = bis.read();
+                sb.append((char)symbol);
+            }while(symbol != -1);
+            bis.close();
+        }
+        catch(IOException e){
+            System.out.println("Ошибка при чтении файла");
+        }
+        return sb.toString();
+    }
+
+    private static void writeFile(String fileName, String result){
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(fileName));
+            bos.write(result.getBytes());
+            bos.flush();
+            bos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void printHelp() {
