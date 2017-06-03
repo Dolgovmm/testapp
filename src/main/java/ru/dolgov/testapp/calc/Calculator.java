@@ -8,7 +8,7 @@ import java.io.*;
  */
 public class Calculator {
 
-    private static int add(int[] inputNumbers) {
+    private static int add(int[] inputNumbers) throws ArithmeticException{
         if (inputNumbers.length < 2) {
             throw new ArithmeticException("Неверные входные параметры");
         }
@@ -19,7 +19,7 @@ public class Calculator {
         return result;
     }
 
-    private static int mul(int[] inputNumbers) {
+    private static int mul(int[] inputNumbers) throws ArithmeticException{
         if (inputNumbers.length < 2) {
             throw new ArithmeticException("Неверные входные параметры");
         }
@@ -55,10 +55,12 @@ public class Calculator {
             }
         } catch (NumberFormatException e) {
             return "После команды нужно вводить числа";
+        } catch (ArithmeticException e) {
+            return e.getMessage();
         }
     }
 
-    private static String readFile(String fileName) {
+    public static String readFromFile(String fileName) {
         int symbol;
         StringBuffer sb = new StringBuffer();
         try{
@@ -75,7 +77,7 @@ public class Calculator {
         return sb.toString();
     }
 
-    private static void writeFile(String fileName, String result){
+    public static void writeToFile(String fileName, String result){
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(fileName));
             bos.write(result.getBytes());
@@ -89,6 +91,8 @@ public class Calculator {
     }
 
     public static void printHelp() {
+        System.out.println("Формат команды testapp - - для ввода данных с консоли и вывода на консоль");
+        System.out.println("Формат команды testapp <имя входного файла> <имя выходного файла> для раоты с файлами");
         System.out.println("Чтобы сложить все числа введите команду add <числа через пробел>");
         System.out.println("Чтобы умножить все числа введите команду mul <числа через пробел>");
         System.out.println("Чтобы умножить первые два числа и прибавить к ним третье введите команду mulAndAdd <числа через пробел>");

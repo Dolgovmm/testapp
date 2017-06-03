@@ -10,16 +10,33 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
+        String result = "";
 
-        Scanner scanner = new Scanner(System.in);
+        if (!args[0].isEmpty() && args[0].equals("-")) {
 
-        Calculator.printHelp();
+            Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Введите команду, числа и нажмите Enter");
+            System.out.println("Введите команду, числа и нажмите Enter");
 
-        String command = scanner.nextLine();
+            String command = scanner.nextLine();
 
-        Calculator.commandParser(command);
+            result = Calculator.commandParser(command);
+        }
 
+        if (!args[0].isEmpty() && !args[0].equals("-")) {
+            result = Calculator.commandParser(Calculator.readFromFile(args[0]));
+        }
+
+        if (!args[1].isEmpty() && args[1].equals("-")) {
+            System.out.println(result);
+        }
+
+        if (!args[1].isEmpty() && !args[1].equals("-")) {
+            Calculator.writeToFile(args[1], result);
+        }
+
+        if (args[0].isEmpty() || args[1].isEmpty()) {
+            Calculator.printHelp();
+        }
     }
 }
