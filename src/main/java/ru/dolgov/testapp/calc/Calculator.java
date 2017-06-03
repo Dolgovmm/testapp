@@ -67,13 +67,16 @@ public class Calculator {
             BufferedInputStream bis = new BufferedInputStream(new FileInputStream(fileName));
             do {
                 symbol = bis.read();
-                sb.append((char)symbol);
+                if (symbol != -1) {
+                    sb.append((char) symbol);
+                }
             }while(symbol != -1);
             bis.close();
         }
         catch(IOException e){
             System.out.println("Ошибка при чтении файла");
         }
+        System.out.println(sb.toString());
         return sb.toString();
     }
 
