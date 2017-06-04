@@ -7,8 +7,12 @@ import java.io.*;
  *         2.06.2017.
  */
 public class Calculator {
+    private AbstractReader reader;
+    private AbstractWriter writer;
 
-    private static int add(int[] inputNumbers) throws ArithmeticException{
+
+
+    private int add(int[] inputNumbers) throws ArithmeticException{
         if (inputNumbers.length < 2) {
             throw new ArithmeticException("Неверные входные параметры");
         }
@@ -19,7 +23,7 @@ public class Calculator {
         return result;
     }
 
-    private static int mul(int[] inputNumbers) throws ArithmeticException{
+    private int mul(int[] inputNumbers) throws ArithmeticException{
         if (inputNumbers.length < 2) {
             throw new ArithmeticException("Неверные входные параметры");
         }
@@ -30,7 +34,7 @@ public class Calculator {
         return result;
     }
 
-    private static int mulAndAdd(int[] inputNumbers) throws ArithmeticException {
+    private int mulAndAdd(int[] inputNumbers) throws ArithmeticException {
         if (inputNumbers.length != 3) {
             throw new ArithmeticException("Неверные входные параметры");
         }
