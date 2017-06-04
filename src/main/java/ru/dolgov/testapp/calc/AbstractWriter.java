@@ -6,5 +6,5 @@ package ru.dolgov.testapp.calc;
  */
 public abstract class AbstractWriter {
 
-    public abstract String write();
+    public abstract void write(String result);
 }

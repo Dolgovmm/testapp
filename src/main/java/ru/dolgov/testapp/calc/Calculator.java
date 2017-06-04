@@ -10,7 +10,14 @@ public class Calculator {
     private AbstractReader reader;
     private AbstractWriter writer;
 
-
+    public Calculator(String input, String output) {
+        if (input.equals("-")) {
+            reader = new ConsoleReader();
+        }
+        if (output.equals("-")) {
+            writer = new ConsoleWriter();
+        }
+    }
 
     private int add(int[] inputNumbers) throws ArithmeticException{
         if (inputNumbers.length < 2) {
@@ -41,7 +48,7 @@ public class Calculator {
         return inputNumbers[0] * inputNumbers[1] + inputNumbers[2];
     }
 
-    public static String commandParser(String command) {
+    public String commandParser(String command) {
         String[] commandArray = command.split(" ");
         int[] inputNumbers = new int[commandArray.length - 1];
         try {
@@ -97,7 +104,7 @@ public class Calculator {
         }
     }
 
-    public static void printHelp() {
+    public void printHelp() {
         System.out.println("Формат команды testapp - - для ввода данных с консоли и вывода на консоль");
         System.out.println("Формат команды testapp <имя входного файла> <имя выходного файла> для раоты с файлами");
         System.out.println("Чтобы сложить все числа введите команду add <числа через пробел>");
