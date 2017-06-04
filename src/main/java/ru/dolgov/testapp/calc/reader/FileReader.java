@@ -1,4 +1,6 @@
-package ru.dolgov.testapp.calc;
+package ru.dolgov.testapp.calc.reader;
+
+import ru.dolgov.testapp.calc.reader.AbstractReader;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;

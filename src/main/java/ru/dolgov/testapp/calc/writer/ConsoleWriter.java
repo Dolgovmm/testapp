@@ -1,4 +1,6 @@
-package ru.dolgov.testapp.calc;
+package ru.dolgov.testapp.calc.writer;
+
+import ru.dolgov.testapp.calc.writer.AbstractWriter;
 
 /**
  * @author M. Dolgov

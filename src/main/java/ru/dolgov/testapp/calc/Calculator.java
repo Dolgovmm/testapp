@@ -1,6 +1,11 @@
 package ru.dolgov.testapp.calc;
 
-import java.io.*;
+import ru.dolgov.testapp.calc.reader.AbstractReader;
+import ru.dolgov.testapp.calc.reader.ConsoleReader;
+import ru.dolgov.testapp.calc.reader.FileReader;
+import ru.dolgov.testapp.calc.writer.AbstractWriter;
+import ru.dolgov.testapp.calc.writer.ConsoleWriter;
+import ru.dolgov.testapp.calc.writer.FileWriter;
 
 /**
  * @author M. Dolgov
@@ -14,8 +19,15 @@ public class Calculator {
         if (input.equals("-")) {
             reader = new ConsoleReader();
         }
+        if (!input.equals("-")) {
+            reader = new FileReader(input);
+        }
+
         if (output.equals("-")) {
             writer = new ConsoleWriter();
+        }
+        if (!output.equals("-")) {
+            writer = new FileWriter(output);
         }
     }
 
@@ -78,19 +90,6 @@ public class Calculator {
         command = reader.read();
         result = commandParser(command);
         writer.write(result);
-    }
-
-    public static void writeToFile(String fileName, String result){
-        try {
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(fileName));
-            bos.write(result.getBytes());
-            bos.flush();
-            bos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public static void printHelp() {

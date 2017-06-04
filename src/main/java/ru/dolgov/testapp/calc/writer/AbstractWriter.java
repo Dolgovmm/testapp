@@ -1,4 +1,4 @@
-package ru.dolgov.testapp.calc;
+package ru.dolgov.testapp.calc.writer;
 
 /**
  * @author M. Dolgov
