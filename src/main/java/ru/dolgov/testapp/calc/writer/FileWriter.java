@@ -1,7 +1,5 @@
 package ru.dolgov.testapp.calc.writer;
 
-import ru.dolgov.testapp.calc.writer.AbstractWriter;
-
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
