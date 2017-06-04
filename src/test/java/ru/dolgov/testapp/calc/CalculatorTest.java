@@ -7,7 +7,7 @@ import org.junit.Test;
  * @author M. Dolgov
  *         03.06.2017.
  */
-public class CalculatorAddTest {
+public class CalculatorTest {
 
     @Test
     public void testAdd() {
