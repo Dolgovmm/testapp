@@ -16,19 +16,8 @@ public class Calculator {
     private AbstractWriter writer;
 
     public Calculator(String input, String output) {
-        if (input.equals("-")) {
-            reader = new ConsoleReader();
-        }
-        if (!input.equals("-")) {
-            reader = new FileReader(input);
-        }
-
-        if (output.equals("-")) {
-            writer = new ConsoleWriter();
-        }
-        if (!output.equals("-")) {
-            writer = new FileWriter(output);
-        }
+        reader = InputOutputFactory.gerReader(input);
+        writer = InputOutputFactory.getWriter(output);
     }
 
     private int add(int[] inputNumbers) throws ArithmeticException{
@@ -60,7 +49,7 @@ public class Calculator {
         return inputNumbers[0] * inputNumbers[1] + inputNumbers[2];
     }
 
-    public String commandParser(String command) {
+    private String commandParser(String command) {
         String[] commandArray = command.split(" ");
         int[] inputNumbers = new int[commandArray.length - 1];
         try {

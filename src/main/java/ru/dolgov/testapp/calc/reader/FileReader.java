@@ -34,7 +34,6 @@ public class FileReader extends AbstractReader {
         catch(IOException e){
             System.out.println("Ошибка при чтении файла");
         }
-        System.out.println(sb.toString());
         return sb.toString();
     }
 }
