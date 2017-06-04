@@ -71,24 +71,13 @@ public class Calculator {
         }
     }
 
-    public static String readFromFile(String fileName) {
-        int symbol;
-        StringBuffer sb = new StringBuffer();
-        try{
-            BufferedInputStream bis = new BufferedInputStream(new FileInputStream(fileName));
-            do {
-                symbol = bis.read();
-                if (symbol != -1) {
-                    sb.append((char) symbol);
-                }
-            }while(symbol != -1);
-            bis.close();
-        }
-        catch(IOException e){
-            System.out.println("Ошибка при чтении файла");
-        }
-        System.out.println(sb.toString());
-        return sb.toString();
+    public void calculate() {
+        String command;
+        String result;
+
+        command = reader.read();
+        result = commandParser(command);
+        writer.write(result);
     }
 
     public static void writeToFile(String fileName, String result){
@@ -104,7 +93,7 @@ public class Calculator {
         }
     }
 
-    public void printHelp() {
+    public static void printHelp() {
         System.out.println("Формат команды testapp - - для ввода данных с консоли и вывода на консоль");
         System.out.println("Формат команды testapp <имя входного файла> <имя выходного файла> для раоты с файлами");
         System.out.println("Чтобы сложить все числа введите команду add <числа через пробел>");
