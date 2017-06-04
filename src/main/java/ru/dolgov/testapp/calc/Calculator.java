@@ -1,11 +1,7 @@
 package ru.dolgov.testapp.calc;
 
 import ru.dolgov.testapp.calc.reader.AbstractReader;
-import ru.dolgov.testapp.calc.reader.ConsoleReader;
-import ru.dolgov.testapp.calc.reader.FileReader;
 import ru.dolgov.testapp.calc.writer.AbstractWriter;
-import ru.dolgov.testapp.calc.writer.ConsoleWriter;
-import ru.dolgov.testapp.calc.writer.FileWriter;
 
 /**
  * @author M. Dolgov
@@ -16,8 +12,8 @@ public class Calculator {
     private AbstractWriter writer;
 
     public Calculator(String input, String output) {
-        reader = InputOutputFactory.gerReader(input);
-        writer = InputOutputFactory.getWriter(output);
+        reader = ReaderWriterFactory.gerReader(input);
+        writer = ReaderWriterFactory.getWriter(output);
     }
 
     private int add(int[] inputNumbers) throws ArithmeticException{

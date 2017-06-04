@@ -11,7 +11,7 @@ import ru.dolgov.testapp.calc.writer.FileWriter;
  * @author M. Dolgov
  *         04.06.2017.
  */
-public class InputOutputFactory {
+public class ReaderWriterFactory {
 
     public static AbstractReader gerReader(String input) {
         if (input.equals("-")) {
