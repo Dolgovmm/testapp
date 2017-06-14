@@ -2,6 +2,7 @@ package ru.dolgov.testapp.calc;
 
 import ru.dolgov.testapp.calc.reader.AbstractReader;
 import ru.dolgov.testapp.calc.writer.AbstractWriter;
+import ru.dolgov.testapp.operation.Operation;
 
 /**
  * @author M. Dolgov
@@ -10,39 +11,11 @@ import ru.dolgov.testapp.calc.writer.AbstractWriter;
 public class Calculator {
     private AbstractReader reader;
     private AbstractWriter writer;
+    private Operation operation;
 
     public Calculator(String input, String output) {
         reader = ReaderWriterFactory.gerReader(input);
         writer = ReaderWriterFactory.getWriter(output);
-    }
-
-    private int add(int[] inputNumbers) throws ArithmeticException{
-        if (inputNumbers.length < 2) {
-            throw new ArithmeticException("Неверные входные параметры");
-        }
-        int result = 0;
-        for (int i = 0; i < inputNumbers.length; i++) {
-            result += inputNumbers[i];
-        }
-        return result;
-    }
-
-    private int mul(int[] inputNumbers) throws ArithmeticException{
-        if (inputNumbers.length < 2) {
-            throw new ArithmeticException("Неверные входные параметры");
-        }
-        int result = 1;
-        for (int i = 0; i < inputNumbers.length; i++) {
-            result *= inputNumbers[i];
-        }
-        return result;
-    }
-
-    private int mulAndAdd(int[] inputNumbers) throws ArithmeticException {
-        if (inputNumbers.length != 3) {
-            throw new ArithmeticException("Неверные входные параметры");
-        }
-        return inputNumbers[0] * inputNumbers[1] + inputNumbers[2];
     }
 
     private String commandParser(String command) {
@@ -52,15 +25,8 @@ public class Calculator {
             for (int i = 0; i < commandArray.length - 1; i++) {
                 inputNumbers[i] = Integer.parseInt(commandArray[i + 1]);
             }
-            if (commandArray[0].equals("add")) {
-                return "Ответ: " + add(inputNumbers);
-            } else if (commandArray[0].equals("mul")) {
-                return "Ответ: " + mul(inputNumbers);
-            } else if (commandArray[0].equals("mulAndAdd")) {
-                return "Ответ: " + mulAndAdd(inputNumbers);
-            } else {
-                return "Введена неправильная команда";
-            }
+            operation = OperationsFactory.getOperation(commandArray[0]);
+            return "Ответ: " + operation.calculate(inputNumbers);
         } catch (NumberFormatException e) {
             return "После команды нужно вводить числа";
         } catch (ArithmeticException e) {
